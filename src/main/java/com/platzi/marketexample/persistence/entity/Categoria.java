@@ -1,6 +1,8 @@
 package com.platzi.marketexample.persistence.entity;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name = "categorias")
 public class Categoria  {
@@ -15,6 +17,9 @@ public class Categoria  {
 
     @Column(name = "estado")
     private Boolean active;
+
+    @OneToMany(mappedBy = "categoria")
+    List<Producto> producto;
 
     public Integer getId() {
         return id;

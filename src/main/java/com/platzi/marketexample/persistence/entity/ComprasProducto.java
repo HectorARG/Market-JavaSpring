@@ -6,11 +6,15 @@ import javax.persistence.*;
 @Table(name = "compras_productos")
 public class ComprasProducto {
 
+    /*
     @ManyToOne
     private Compra idCompra;
 
     @ManyToOne
     private Producto idProducto;
+    */
+    @EmbeddedId
+    private ComprasProductoPK id;
 
     private Integer cantidad;
 
@@ -18,21 +22,13 @@ public class ComprasProducto {
 
     private Boolean estado;
 
-    public Compra getIdCompra() {
-        return idCompra;
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_compra", insertable = false, updatable = false)
+    private Compra compra;
 
-    public void setIdCompra(Compra idCompra) {
-        this.idCompra = idCompra;
-    }
-
-    public Producto getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(Producto idProducto) {
-        this.idProducto = idProducto;
-    }
+    @ManyToOne
+    @JoinColumn(name = "id_produto", insertable = false, updatable = false)
+    private Producto producto;
 
     public Integer getCantidad() {
         return cantidad;
@@ -58,14 +54,4 @@ public class ComprasProducto {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        return "ComprasProducto{" +
-                "idCompra=" + idCompra +
-                ", idProducto=" + idProducto +
-                ", cantidad=" + cantidad +
-                ", total=" + total +
-                ", estado=" + estado +
-                '}';
-    }
 }
